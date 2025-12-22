@@ -1,54 +1,12 @@
 {
-  "name": "dotagent",
-  "version": "0.1.0",
+  "name": "@mnorth/dotagent",
   "description": "Multi-file AI agent configuration manager with .agent directory support",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "bin": {
-    "dotagent": "./dist/cli.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "test": "vitest",
-    "pretest:ci": "pnpm build",
-    "test:ci": "vitest run",
-    "typecheck": "tsc --noEmit"
-  },
-  "keywords": [
-    "ai",
-    "agent",
-    "configuration",
-    "copilot",
-    "cursor",
-    "cline",
-    "windsurf",
-    "zed",
-    "markdown"
-  ],
+  "version": "0.1.0",
   "author": "John Lindquist",
-  "license": "MIT",
-  "homepage": "https://github.com/johnlindquist/dotagent#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/johnlindquist/dotagent.git"
+  "bin": {
+    "agentrc-sync": "./dist/cli.js"
   },
-  "bugs": {
-    "url": "https://github.com/johnlindquist/dotagent/issues"
-  },
-  "packageManager": "pnpm@10.11.0",
+  "bugs": "https://github.com/johnlindquist/dotagent/issues",
   "dependencies": {
     "@inquirer/prompts": "^7.5.3",
     "gray-matter": "^4.0.3",
@@ -61,11 +19,52 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^24.0.3",
-    "@types/tmp": "^0.2.6",
+    "@types/node": "^20.0.0",
     "execa": "^9.6.0",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3",
-    "vitest": "^3.2.3"
-  }
+    "typescript": "5.8.2",
+    "vitest": "^1.0.4"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/dotagent-public.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/johnlindquist/dotagent#readme",
+  "keywords": [
+    "agent",
+    "ai",
+    "cline",
+    "configuration",
+    "copilot",
+    "cursor",
+    "markdown",
+    "windsurf",
+    "zed"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "packageManager": "pnpm@10.11.0",
+  "repository": "johnlindquist/dotagent.git",
+  "scripts": {
+    "build": "tsc -b && api-extractor run --local",
+    "build:tsc": "tsc -b",
+    "check": "npm run check:lint-ts && npm run check:typecheck && npm run check:api-report",
+    "check:api-report": "api-extractor run",
+    "check:lint-ts": "eslint src --ext .ts",
+    "check:typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist && rm -f *.tsbuildinfo tsconfig.tsbuildinfo ../../api-reports/sync-engine.api.md",
+    "dev": "tsc -b --watch",
+    "generate:api-docs": "api-documenter markdown --input-folder ../../tmp/api-extractor --output-folder ../../docs",
+    "generate:api-report": "api-extractor run --local",
+    "test": "npm run test:unit",
+    "test:unit": "vitest run"
+  },
+  "type": "module",
+  "types": "./dist/dotagent-public.d.ts"
 }

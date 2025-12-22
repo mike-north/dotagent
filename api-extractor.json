@@ -1,0 +1,19 @@
+{
+  "extends": "../../api-extractor.base.json",
+  "projectFolder": ".",
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
+  "apiReport": {
+    "enabled": true,
+    "reportFileName": "dotagent.api.md",
+    "reportFolder": "../../api-reports"
+  },
+  "docModel": {
+    "enabled": true,
+    "apiJsonFilePath": "../../tmp/api-extractor/dotagent.api.json"
+  },
+  "dtsRollup": {
+    "enabled": true,
+    "untrimmedFilePath": "../../tmp/api-extractor/dotagent-private.d.ts",
+    "publicTrimmedFilePath": "<projectFolder>/dist/dotagent-public.d.ts"
+  }
+}
