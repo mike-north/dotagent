@@ -58,7 +58,7 @@
     "check:api-report": "api-extractor run",
     "check:lint-ts": "eslint src --ext .ts",
     "check:typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist && rm -f *.tsbuildinfo tsconfig.tsbuildinfo ../../api-reports/sync-engine.api.md",
+    "clean": "rm -rf dist api-reports temp && rm -f *.tsbuildinfo tsconfig.tsbuildinfo",
     "dev": "tsc -b --watch",
     "generate:api-docs": "api-documenter markdown --input-folder ../../tmp/api-extractor --output-folder ../../docs",
     "generate:api-report": "api-extractor run --local",
