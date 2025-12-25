@@ -777,7 +777,37 @@ export function validateRule(metadata: RuleMetadata, content: string): Validatio
 export function validateSkill(metadata: SkillMetadata, content: string): ValidationResult;
 
 // @public
+<<<<<<< Updated upstream
 export function validateSubAgent(metadata: SubAgentMetadata, content: string): ValidationResult;
+=======
+export function validateSkill(skill: {
+    name?: string;
+    description?: string;
+}): ValidationResult;
+
+// @public
+export function validateSubAgent(subagent: {
+    name?: string;
+    description?: string;
+}): ValidationResult;
+
+// @public (undocumented)
+export const VALIDATION_CODES: {
+    readonly COMMAND_MISSING_NAME: "COMMAND_MISSING_NAME";
+    readonly SKILL_MISSING_NAME: "SKILL_MISSING_NAME";
+    readonly SKILL_MISSING_DESCRIPTION: "SKILL_MISSING_DESCRIPTION";
+    readonly SKILL_DESCRIPTION_TOO_LONG: "SKILL_DESCRIPTION_TOO_LONG";
+    readonly SUBAGENT_MISSING_NAME: "SUBAGENT_MISSING_NAME";
+    readonly SUBAGENT_MISSING_DESCRIPTION: "SUBAGENT_MISSING_DESCRIPTION";
+    readonly SUBAGENT_NAME_TOO_LONG: "SUBAGENT_NAME_TOO_LONG";
+    readonly HOOK_MISSING_EVENT: "HOOK_MISSING_EVENT";
+    readonly HOOK_MISSING_COMMAND: "HOOK_MISSING_COMMAND";
+    readonly HOOK_INVALID_EVENT: "HOOK_INVALID_EVENT";
+    readonly RULE_MISSING_NAME: "RULE_MISSING_NAME";
+    readonly RULE_MISSING_CONTENT: "RULE_MISSING_CONTENT";
+    readonly MISSING_REQUIRED_FIELD: "MISSING_REQUIRED_FIELD";
+};
+>>>>>>> Stashed changes
 
 // @public (undocumented)
 export interface ValidationError {

@@ -38,9 +38,16 @@ export interface ValidationSuggestion {
   actionable: boolean
 }
 
+// Length limits
+export const LIMITS = {
+  SKILL_DESCRIPTION_MAX: 1024,
+  SUBAGENT_NAME_MAX: 64,
+} as const
+
 // Error codes for programmatic handling
 export const VALIDATION_CODES = {
   // Skill validation codes
+<<<<<<< Updated upstream
   SKILL_MISSING_EXPERTISE: 'SKILL_MISSING_EXPERTISE',
   SKILL_EMPTY_EXPERTISE: 'SKILL_EMPTY_EXPERTISE',
   SKILL_INVALID_PORTABILITY: 'SKILL_INVALID_PORTABILITY',
@@ -55,6 +62,16 @@ export const VALIDATION_CODES = {
   SUBAGENT_INVALID_TOOLS: 'SUBAGENT_INVALID_TOOLS',
   SUBAGENT_RULE_CONFLICT: 'SUBAGENT_RULE_CONFLICT',
   SUBAGENT_MISSING_PROCEDURAL: 'SUBAGENT_MISSING_PROCEDURAL',
+=======
+  SKILL_MISSING_NAME: 'SKILL_MISSING_NAME',
+  SKILL_MISSING_DESCRIPTION: 'SKILL_MISSING_DESCRIPTION',
+  SKILL_DESCRIPTION_TOO_LONG: 'SKILL_DESCRIPTION_TOO_LONG',
+
+  // SubAgent validation codes
+  SUBAGENT_MISSING_NAME: 'SUBAGENT_MISSING_NAME',
+  SUBAGENT_MISSING_DESCRIPTION: 'SUBAGENT_MISSING_DESCRIPTION',
+  SUBAGENT_NAME_TOO_LONG: 'SUBAGENT_NAME_TOO_LONG',
+>>>>>>> Stashed changes
 
   // Command validation codes
   COMMAND_MISSING_TRIGGER: 'COMMAND_MISSING_TRIGGER',
@@ -331,6 +348,12 @@ export function validateSubAgent(metadata: SubAgentMetadata, content: string): V
       field: 'tools',
       actionable: true
     })
+  } else if (skill.description.length > LIMITS.SKILL_DESCRIPTION_MAX) {
+    errors.push({
+      code: VALIDATION_CODES.SKILL_DESCRIPTION_TOO_LONG,
+      message: `Skill description must be at most ${LIMITS.SKILL_DESCRIPTION_MAX} characters (got ${skill.description.length})`,
+      field: 'description',
+    })
   }
 
   return {
@@ -363,6 +386,12 @@ export function validateCommand(metadata: CommandMetadata, content: string): Val
       message: 'Command triggers must start with "/"',
       field: 'trigger',
       severity: 'error'
+    })
+  } else if (subagent.name.length > LIMITS.SUBAGENT_NAME_MAX) {
+    errors.push({
+      code: VALIDATION_CODES.SUBAGENT_NAME_TOO_LONG,
+      message: `SubAgent name must be at most ${LIMITS.SUBAGENT_NAME_MAX} characters (got ${subagent.name.length})`,
+      field: 'name',
     })
   }
 
